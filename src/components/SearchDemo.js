@@ -53,7 +53,7 @@ const SearchDemo = () => {
   ];
   
   // Common stopwords
-  const stopwords = new Set(['the', 'a', 'an', 'is', 'are', 'in', 'of', 'for', 'with', 'on', 'at', 'to', 'from', 'by']);
+  const stopwords = new Set(['a', 'about', 'an', 'are', 'as', 'at', 'be', 'by', 'com', 'de', 'en', 'for', 'from', 'how', 'i', 'in', 'is', 'it', 'la', 'of', 'on', 'or', 'that', 'the', 'this', 'to', 'was', 'what', 'when', 'where', 'who', 'will', 'with', 'und', 'the', 'www']);
   
   // Minimum word length
   const minWordLength = 3;
