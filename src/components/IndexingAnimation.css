@@ -1,0 +1,379 @@
+.animation-container {
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  min-height: 450px;
+}
+
+.step-indicator {
+  text-align: center;
+  font-size: 1rem;
+  color: #7f8c8d;
+  margin-bottom: 15px;
+}
+
+.animation-step {
+  padding: 10px;
+}
+
+.animation-step h3 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  color: #2c3e50;
+  text-align: center;
+}
+
+.mysql-note {
+  background-color: #e8f4fc;
+  border-left: 4px solid #3498db;
+  padding: 10px 15px;
+  margin: 10px 0 20px;
+  display: flex;
+  align-items: flex-start;
+  border-radius: 0 4px 4px 0;
+}
+
+.note-icon {
+  margin-right: 10px;
+  font-size: 1.2rem;
+}
+
+.note-content {
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+/* Document Collection styling */
+.documents {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.document {
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.doc-id {
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #7f8c8d;
+}
+
+.doc-content {
+  line-height: 1.5;
+}
+
+/* Tokenization styling */
+.tokenized .tokens {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.token {
+  background-color: #e8f4fc;
+  border: 1px solid #bde0f3;
+  border-radius: 4px;
+  padding: 5px 10px;
+  font-family: monospace;
+  position: relative;
+}
+
+/* Stopword filtering styling */
+.stopword {
+  background-color: #f2f2f2;
+  border: 1px dashed #ccc;
+  color: #999;
+  position: relative;
+}
+
+.stopword-badge {
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #f39c12;
+  color: white;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 0.7rem;
+  white-space: nowrap;
+}
+
+/* Normalization styling */
+.normalized .tokens {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.token-normalized {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f0f9ff;
+  border-radius: 4px;
+  padding: 8px;
+  position: relative;
+}
+
+.token-normalized .original {
+  font-family: monospace;
+  margin-bottom: 5px;
+}
+
+.token-normalized .arrow {
+  color: #7f8c8d;
+  margin: 3px 0;
+}
+
+.token-normalized .normalized {
+  font-family: monospace;
+  background-color: #d5eeff;
+  padding: 3px 6px;
+  border-radius: 3px;
+  position: relative;
+}
+
+.strikethrough {
+  text-decoration: line-through;
+  color: #999;
+}
+
+.filter-reason {
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #e74c3c;
+  color: white;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 0.7rem;
+  white-space: nowrap;
+}
+
+/* Inverted Index styling */
+.index-visualization {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-top: 20px;
+}
+
+.term-header, .posting-list-header {
+  background-color: #eee;
+  padding: 10px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.index-entry {
+  display: contents;
+}
+
+.term, .posting-list {
+  padding: 8px 12px;
+  border-top: 1px solid #eee;
+}
+
+.term {
+  background-color: #f5f5f5;
+  font-family: monospace;
+}
+
+.doc-ref {
+  display: inline-block;
+  background-color: #e1f5fe;
+  border-radius: 3px;
+  padding: 2px 5px;
+  margin-right: 5px;
+  font-family: monospace;
+}
+
+/* MySQL Internal Tables styling */
+.innodb-tables {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.auxiliary-tables h4, .common-tables h4 {
+  margin-bottom: 10px;
+  color: #2c3e50;
+}
+
+.table-group {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 15px;
+}
+
+.db-table {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.table-header {
+  background-color: #3498db;
+  color: white;
+  padding: 8px 12px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.table-body {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.table-row {
+  display: flex;
+  border-bottom: 1px solid #eee;
+}
+
+.table-row.header {
+  background-color: #f5f5f5;
+  font-weight: bold;
+}
+
+.table-cell {
+  flex: 1;
+  padding: 6px 8px;
+  border-right: 1px solid #eee;
+  font-size: 0.85rem;
+}
+
+.table-cell:last-child {
+  border-right: none;
+}
+
+.common-tables {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+/* Search Query styling */
+.query-process {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.query-normalization {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.original-query, .normalized-query {
+  font-family: monospace;
+  font-size: 1.2rem;
+  padding: 8px 16px;
+  border-radius: 4px;
+  margin: 10px 0;
+}
+
+.original-query {
+  background-color: #f0f0f0;
+}
+
+.normalized-query {
+  background-color: #e1f5fe;
+}
+
+.arrow {
+  color: #7f8c8d;
+  margin: 5px 0;
+}
+
+.index-lookup {
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.lookup-title {
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #2c3e50;
+}
+
+.index-entries {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.index-entry.highlight {
+  background-color: #fffde7;
+}
+
+.index-entry.highlight .term,
+.index-entry.highlight .posting-list {
+  background-color: #fff9c4;
+  font-weight: bold;
+}
+
+/* Search Results styling */
+.results-count {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 1.1rem;
+  color: #2c3e50;
+}
+
+.results-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.result-item {
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 15px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.result-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.relevance-score {
+  background-color: #3498db;
+  color: white;
+  padding: 3px 8px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+}
+
+.highlight {
+  background-color: #fff176;
+  padding: 2px 0;
+  font-weight: bold;
+}

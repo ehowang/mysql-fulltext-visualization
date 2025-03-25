@@ -1,0 +1,227 @@
+.performance-container {
+    padding: 20px;
+  }
+  
+  .performance-container h2 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .dataset-control {
+    margin-bottom: 30px;
+    text-align: center;
+  }
+  
+  .dataset-control label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  
+  .button-group {
+    display: flex;
+    justify-content: center;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .button-group button {
+    padding: 10px 15px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+  }
+  
+  .button-group button:hover {
+    background-color: #f1f2f3;
+  }
+  
+  .button-group button.active {
+    background-color: #3498db;
+    color: white;
+  }
+  
+  .performance-charts {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+    margin-bottom: 40px;
+  }
+  
+  @media (min-width: 768px) {
+    .performance-charts {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .performance-charts .chart-container:first-child {
+      grid-column: 1 / -1;
+    }
+  }
+  
+  .chart-container {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    padding: 20px;
+  }
+  
+  .chart-container h3 {
+    color: #2c3e50;
+    margin-top: 0;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  
+  .chart-description {
+    text-align: center;
+    color: #7f8c8d;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+  }
+  
+  .bar-chart {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .chart-item {
+    display: flex;
+    align-items: center;
+  }
+  
+  .chart-item .label {
+    width: 120px;
+    text-align: right;
+    padding-right: 15px;
+    font-size: 0.9rem;
+  }
+  
+  .chart-item .bar {
+    height: 30px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 10px;
+    font-size: 0.9rem;
+    color: white;
+    transition: width 0.5s ease-in-out;
+  }
+  
+  .bar.fulltext {
+    background-color: #3498db;
+  }
+  
+  .bar.like {
+    background-color: #e74c3c;
+  }
+  
+  .bar.regex {
+    background-color: #9b59b6;
+  }
+  
+  .bar.table-data {
+    background-color: #2ecc71;
+  }
+  
+  .bar.index-size {
+    background-color: #f39c12;
+  }
+  
+  .bar.without-index {
+    background-color: #1abc9c;
+  }
+  
+  .bar.with-index {
+    background-color: #e67e22;
+  }
+  
+  .performance-implications {
+    margin-bottom: 40px;
+  }
+  
+  .performance-implications h3 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .implications-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  @media (min-width: 768px) {
+    .implications-content {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  .implication {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    padding: 20px;
+  }
+  
+  .implication h4 {
+    color: #2c3e50;
+    margin-top: 0;
+    margin-bottom: 10px;
+  }
+  
+  .implication p {
+    margin: 0;
+    line-height: 1.5;
+  }
+  
+  .optimization-tips h3 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .tips-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  @media (min-width: 576px) {
+    .tips-container {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (min-width: 992px) {
+    .tips-container {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+  
+  .tip-card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    padding: 15px;
+    border-top: 3px solid #3498db;
+  }
+  
+  .tip-card h4 {
+    color: #2c3e50;
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1rem;
+  }
+  
+  .tip-card p {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
