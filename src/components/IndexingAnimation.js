@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import './IndexingAnimation.css';
 
 const IndexingAnimation = ({ 
@@ -10,16 +10,6 @@ const IndexingAnimation = ({
   totalSteps
 }) => {
   const animationTimerRef = useRef(null);
-  
-  // State for user-defined documents and search query
-  const [userDocuments, setUserDocuments] = useState([
-    { id: 1, text: "The quick brown fox jumps over the lazy dog" },
-    { id: 2, text: "A fox is a wild animal related to dogs and wolves" },
-    { id: 3, text: "The dog watched the fox from a distance" }
-  ]);
-  const [searchQuery, setSearchQuery] = useState("fox");
-  const [showDocumentForm, setShowDocumentForm] = useState(false);
-  const [newDocText, setNewDocText] = useState("");
   
   // Clear timer on unmount
   useEffect(() => {
@@ -51,79 +41,32 @@ const IndexingAnimation = ({
     };
   }, [isPlaying, activeStep, setActiveStep, setIsPlaying, playbackSpeed, totalSteps]);
   
-  // Handle adding a new document
-  const handleAddDocument = (e) => {
-    e.preventDefault();
-    if (newDocText.trim()) {
-      setUserDocuments([
-        ...userDocuments, 
-        { id: userDocuments.length + 1, text: newDocText }
-      ]);
-      setNewDocText("");
-      setShowDocumentForm(false);
-    }
-  };
-  
-  // Handle removing a document
-  const handleRemoveDocument = (id) => {
-    if (userDocuments.length > 1) { // Ensure at least one document remains
-      const updatedDocs = userDocuments.filter(doc => doc.id !== id);
-      // Reassign IDs to maintain sequence
-      const reindexedDocs = updatedDocs.map((doc, index) => ({
-        ...doc,
-        id: index + 1
-      }));
-      setUserDocuments(reindexedDocs);
-    }
-  };
-  
-  // Handle editing a document
-  const handleEditDocument = (id, newText) => {
-    const updatedDocs = userDocuments.map(doc => 
-      doc.id === id ? { ...doc, text: newText } : doc
-    );
-    setUserDocuments(updatedDocs);
-  };
-  
-  // Reset animation when changing documents or query
-  useEffect(() => {
-    if (activeStep > 0) {
-      setActiveStep(0);
-      setIsPlaying(false);
-    }
-  }, [userDocuments, searchQuery, setActiveStep, setIsPlaying]);
+  // Sample documents for indexing
+  const documents = [
+    { id: 1, text: "The quick brown fox jumps over the lazy dog" },
+    { id: 2, text: "A fox is a wild animal related to dogs and wolves" },
+    { id: 3, text: "The dog watched the fox from a distance" }
+  ];
   
   // Animation steps content
   const renderAnimationStep = () => {
     switch(activeStep) {
       case 0:
-        return <DocumentCollection 
-                 documents={userDocuments}
-                 onAddDocument={() => setShowDocumentForm(true)}
-                 showForm={showDocumentForm}
-                 newDocText={newDocText}
-                 setNewDocText={setNewDocText}
-                 handleAddDocument={handleAddDocument}
-                 handleRemoveDocument={handleRemoveDocument}
-                 handleEditDocument={handleEditDocument}
-                 setSearchQuery={setSearchQuery}
-                 searchQuery={searchQuery}
-                 setShowDocumentForm={setShowDocumentForm}
-               />;
+        return <DocumentCollection documents={documents} />;
       case 1:
-        return <Tokenization documents={userDocuments} />;
+        return <Tokenization documents={documents} />;
       case 2:
-        return <StopwordFiltering documents={userDocuments} />;
+        return <StopwordFiltering documents={documents} />;
       case 3:
-        return <NormalizationStep documents={userDocuments} />;
+        return <NormalizationStep documents={documents} />;
       case 4:
-        return <InvertedIndexCreation documents={userDocuments} />;
+        return <InvertedIndexCreation documents={documents} />;
       case 5:
-        return <MySQLTables documents={userDocuments} />;
+        return <MySQLTables documents={documents} />;
       case 6:
-        return <SearchQuery documents={userDocuments} searchTerm={searchQuery} />;
+        return <SearchQuery documents={documents} searchTerm="fox" />;
       case 7:
-        return <SearchResults documents={userDocuments} searchTerm={searchQuery} />;
+        return <SearchResults documents={documents} searchTerm="fox" />;
       default:
         return <div>Something went wrong</div>;
     }
@@ -140,34 +83,7 @@ const IndexingAnimation = ({
 };
 
 // Component to show the initial document collection
-const DocumentCollection = ({ 
-  documents, 
-  onAddDocument, 
-  showForm, 
-  newDocText, 
-  setNewDocText, 
-  handleAddDocument,
-  handleRemoveDocument,
-  handleEditDocument,
-  setSearchQuery,
-  searchQuery,
-  setShowDocumentForm
-}) => {
-  const [editingId, setEditingId] = useState(null);
-  const [editText, setEditText] = useState("");
-
-  const startEditing = (id, text) => {
-    setEditingId(id);
-    setEditText(text);
-  };
-
-  const saveEdit = () => {
-    if (editText.trim()) {
-      handleEditDocument(editingId, editText);
-    }
-    setEditingId(null);
-  };
-  
+const DocumentCollection = ({ documents }) => {
   return (
     <div className="animation-step document-collection">
       <h3>Document Collection</h3>
@@ -177,85 +93,13 @@ const DocumentCollection = ({
           MySQL full-text indexing supports CHAR, VARCHAR, and TEXT columns.
         </div>
       </div>
-      
-      <div className="action-panel">
-        <div className="search-query-input">
-          <label htmlFor="search-query">Search Query:</label>
-          <input
-            type="text"
-            id="search-query"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Enter search terms..."
-          />
-          <div className="input-note">
-            This query will be used in the search steps (6-7)
-          </div>
-        </div>
-        
-        <button className="add-document-btn" onClick={onAddDocument}>
-          Add New Document
-        </button>
-      </div>
-      
-      {showForm && (
-        <div className="document-form">
-          <form onSubmit={handleAddDocument}>
-            <textarea
-              value={newDocText}
-              onChange={(e) => setNewDocText(e.target.value)}
-              placeholder="Enter document text..."
-              required
-            />
-            <div className="form-actions">
-              <button type="submit">Add Document</button>
-              <button type="button" onClick={() => setNewDocText("")}>Clear</button>
-              <button type="button" onClick={() => setShowDocumentForm(false)}>Cancel</button>
-            </div>
-          </form>
-        </div>
-      )}
-      
       <div className="documents">
         {documents.map(doc => (
           <div key={doc.id} className="document">
-            <div className="document-header">
-              <div className="doc-id">Document {doc.id} (DOC_ID in MySQL)</div>
-              <div className="document-actions">
-                <button className="edit-btn" onClick={() => startEditing(doc.id, doc.text)}>
-                  Edit
-                </button>
-                <button 
-                  className="delete-btn" 
-                  onClick={() => handleRemoveDocument(doc.id)}
-                  disabled={documents.length <= 1}
-                >
-                  Delete
-                </button>
-              </div>
-            </div>
-            
-            {editingId === doc.id ? (
-              <div className="edit-document">
-                <textarea
-                  value={editText}
-                  onChange={(e) => setEditText(e.target.value)}
-                />
-                <div className="edit-actions">
-                  <button onClick={saveEdit}>Save</button>
-                  <button onClick={() => setEditingId(null)}>Cancel</button>
-                </div>
-              </div>
-            ) : (
-              <div className="doc-content">{doc.text}</div>
-            )}
+            <div className="doc-id">Document {doc.id} (DOC_ID in MySQL)</div>
+            <div className="doc-content">{doc.text}</div>
           </div>
         ))}
-      </div>
-      
-      <div className="documents-note">
-        <strong>Note:</strong> You can add, edit, or remove documents in this step.
-        Changes will flow through all subsequent animation steps.
       </div>
     </div>
   );
@@ -291,7 +135,7 @@ const Tokenization = ({ documents }) => {
 // Component to show stopword filtering process
 const StopwordFiltering = ({ documents }) => {
   // Common stopwords in English
-  const stopwords = new Set(['a', 'about', 'an', 'are', 'as', 'at', 'be', 'by', 'com', 'de', 'en', 'for', 'from', 'how', 'i', 'in', 'is', 'it', 'la', 'of', 'on', 'or', 'that', 'the', 'this', 'to', 'was', 'what', 'when', 'where', 'who', 'will', 'with', 'und', 'the', 'www']);
+  const stopwords = new Set(['the', 'a', 'is', 'over', 'from']);
   
   return (
     <div className="animation-step stopword-filtering">
@@ -334,7 +178,7 @@ const NormalizationStep = ({ documents }) => {
   };
   
   // Common stopwords in English
-  const stopwords = new Set(['a', 'about', 'an', 'are', 'as', 'at', 'be', 'by', 'com', 'de', 'en', 'for', 'from', 'how', 'i', 'in', 'is', 'it', 'la', 'of', 'on', 'or', 'that', 'the', 'this', 'to', 'was', 'what', 'when', 'where', 'who', 'will', 'with', 'und', 'the', 'www']);
+  const stopwords = new Set(['the', 'a', 'is', 'over', 'from']);
   
   return (
     <div className="animation-step normalization">
@@ -379,7 +223,7 @@ const NormalizationStep = ({ documents }) => {
 // Component to show the inverted index creation
 const InvertedIndexCreation = ({ documents }) => {
   // Common stopwords in English
-  const stopwords = new Set( ['a', 'about', 'an', 'are', 'as', 'at', 'be', 'by', 'com', 'de', 'en', 'for', 'from', 'how', 'i', 'in', 'is', 'it', 'la', 'of', 'on', 'or', 'that', 'the', 'this', 'to', 'was', 'what', 'when', 'where', 'who', 'will', 'with', 'und', 'the', 'www']);
+  const stopwords = new Set(['the', 'a', 'is', 'over', 'from']);
   
   // Create an inverted index from the documents
   const createInvertedIndex = () => {
@@ -540,7 +384,7 @@ const MySQLTables = () => {
 // Component to show a search query being processed
 const SearchQuery = ({ documents, searchTerm }) => {
   // Common stopwords in English
-  const stopwords = new Set(['a', 'about', 'an', 'are', 'as', 'at', 'be', 'by', 'com', 'de', 'en', 'for', 'from', 'how', 'i', 'in', 'is', 'it', 'la', 'of', 'on', 'or', 'that', 'the', 'this', 'to', 'was', 'what', 'when', 'where', 'who', 'will', 'with', 'und', 'the', 'www']);
+  const stopwords = new Set(['the', 'a', 'is', 'over', 'from']);
   
   // Create an inverted index from the documents
   const createInvertedIndex = () => {
@@ -623,7 +467,7 @@ const SearchQuery = ({ documents, searchTerm }) => {
 // Component to show search results
 const SearchResults = ({ documents, searchTerm }) => {
   // Common stopwords in English
-  const stopwords = new Set( ['a', 'about', 'an', 'are', 'as', 'at', 'be', 'by', 'com', 'de', 'en', 'for', 'from', 'how', 'i', 'in', 'is', 'it', 'la', 'of', 'on', 'or', 'that', 'the', 'this', 'to', 'was', 'what', 'when', 'where', 'who', 'will', 'with', 'und', 'the', 'www']);
+  const stopwords = new Set(['the', 'a', 'is', 'over', 'from']);
   
   // Perform search and get results
   const performSearch = (term) => {
