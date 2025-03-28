@@ -50,30 +50,7 @@ function App() {
         >
           Indexing Process
         </button>
-        <button 
-          className={activeTab === 'search-types' ? 'active' : ''}
-          onClick={() => setActiveTab('search-types')}
-        >
-          Search Types
-        </button>
-        <button 
-          className={activeTab === 'performance' ? 'active' : ''}
-          onClick={() => setActiveTab('performance')}
-        >
-          Performance
-        </button>
-        <button 
-          className={activeTab === 'mysql-syntax' ? 'active' : ''}
-          onClick={() => setActiveTab('mysql-syntax')}
-        >
-          MySQL Syntax
-        </button>
-        <button 
-          className={activeTab === 'demo' ? 'active' : ''}
-          onClick={() => setActiveTab('demo')}
-        >
-          Try It
-        </button>
+        
       </nav>
       
       <main className="main-content">
@@ -81,20 +58,7 @@ function App() {
           <>
             <div className="animation-header">
               <h2>Full-Text Indexing Process</h2>
-              <div className="engine-selector">
-                <label>Storage Engine:</label>
-                <select>
-                  <option value="innodb">InnoDB</option>
-                  <option value="myisam">MyISAM</option>
-                </select>
-                <div className="tooltip">
-                  <span className="info-icon">ⓘ</span>
-                  <span className="tooltip-text">
-                    MySQL supports full-text indexes in both InnoDB and MyISAM storage engines.
-                    The internal implementation differs, but the concept remains the same.
-                  </span>
-                </div>
-              </div>
+
             </div>
             
             <div className="controls">
